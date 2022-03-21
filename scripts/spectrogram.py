@@ -1,10 +1,9 @@
+import sys
 import librosa
 import librosa.display as disp
 import matplotlib.pyplot as plt
 
-def show_spectrogram(filename):
-    audio_path = f"../recordings/{filename}"
-
+def show_spectrogram(audio_path: str, ysup: int = 1000) -> None:
     # audio time series, sample_rate
     y, sr = librosa.load(audio_path)
 
@@ -16,7 +15,7 @@ def show_spectrogram(filename):
     # visualization
     disp.specshow(data, sr=sr, x_axis="time", y_axis="hz")
     plt.colorbar()
-    plt.ylim(0, 1000)
+    plt.ylim(0, ysup)
     plt.show()
 
-show_spectrogram("male-discord-normal0.wav")
+show_spectrogram(*sys.argv[1:])
