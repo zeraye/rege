@@ -18,4 +18,5 @@ def show_spectrogram(audio_path: str, ysup: int = 1000) -> None:
     plt.ylim(0, ysup)
     plt.show()
 
-show_spectrogram(*sys.argv[1:])
+if __name__ == "__main__":
+    show_spectrogram(*sys.argv[1:])
