@@ -121,8 +121,8 @@
     },
     "Recording0025": {
         "FileName": "female-iphone-normal-104.wav",
-        "LowerBoundHz": "320",
-        "UpperBoundHz": "230"
+        "LowerBoundHz": "230",
+        "UpperBoundHz": "320"
     },
     "Recording0026": {
         "FileName": "female-twitch-normal-0.wav",
