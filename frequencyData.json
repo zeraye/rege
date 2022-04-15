@@ -1,0 +1,252 @@
+{
+    "Recording0001": {
+        "FileName": "female-audacity-high-100.wav",
+        "LowerBoundHz": "267",
+        "UpperBoundHz": "314"
+    },
+    "Recording0002": {
+        "FileName": "female-audacity-high-101.wav",
+        "LowerBoundHz": "463",
+        "UpperBoundHz": "582"
+    },
+    "Recording0003": {
+        "FileName": "female-audacity-high-102.wav",
+        "LowerBoundHz": "440",
+        "UpperBoundHz": "550"
+    },
+    "Recording0004": {
+        "FileName": "female-audacity-high-103.wav",
+        "LowerBoundHz": "330",
+        "UpperBoundHz": "522"
+    },
+    "Recording0005": {
+        "FileName": "female-audacity-low-100.wav",
+        "LowerBoundHz": "185",
+        "UpperBoundHz": "205"
+    },
+    "Recording0006": {
+        "FileName": "female-audacity-low-101.wav",
+        "LowerBoundHz": "190",
+        "UpperBoundHz": "220"
+    },
+    "Recording0007": {
+        "FileName": "female-audacity-low-102.wav",
+        "LowerBoundHz": "155",
+        "UpperBoundHz": "270"
+    },
+    "Recording0008": {
+        "FileName": "female-audacity-normal-100.wav",
+        "LowerBoundHz": "210",
+        "UpperBoundHz": "230"
+    },
+    "Recording0009": {
+        "FileName": "female-audacity-normal-101.wav",
+        "LowerBoundHz": "195",
+        "UpperBoundHz": "220"
+    },
+    "Recording0010": {
+        "FileName": "female-audacity-normal-102.wav",
+        "LowerBoundHz": "150",
+        "UpperBoundHz": "350"
+    },
+    "Recording0011": {
+        "FileName": "female-audacity-normal-103.wav",
+        "LowerBoundHz": "170",
+        "UpperBoundHz": "270"
+    },
+    "Recording0012": {
+        "FileName": "female-audacity-normal-104.wav",
+        "LowerBoundHz": "110",
+        "UpperBoundHz": "170"
+    },
+    "Recording0013": {
+        "FileName": "female-discord-high-100.wav",
+        "LowerBoundHz": "190",
+        "UpperBoundHz": "370"
+    },
+    "Recording0014": {
+        "FileName": "female-discord-low-100.wav",
+        "LowerBoundHz": "170",
+        "UpperBoundHz": "340"
+    },
+    "Recording0015": {
+        "FileName": "female-discord-normal-100.wav",
+        "LowerBoundHz": "160",
+        "UpperBoundHz": "290"
+    },
+    "Recording0016": {
+        "FileName": "female-iphone-high-100.wav",
+        "LowerBoundHz": "380",
+        "UpperBoundHz": "470"
+    },
+    "Recording0017": {
+        "FileName": "female-iphone-high-101.wav",
+        "LowerBoundHz": "380",
+        "UpperBoundHz": "570"
+    },
+    "Recording0018": {
+        "FileName": "female-iphone-high-102.wav",
+        "LowerBoundHz": "540",
+        "UpperBoundHz": "615"
+    },
+    "Recording0019": {
+        "FileName": "female-iphone-low-100.wav",
+        "LowerBoundHz": "190",
+        "UpperBoundHz": "245"
+    },
+    "Recording0020": {
+        "FileName": "female-iphone-low-101.wav",
+        "LowerBoundHz": "170",
+        "UpperBoundHz": "205"
+    },
+    "Recording0021": {
+        "FileName": "female-iphone-normal-100.wav",
+        "LowerBoundHz": "215",
+        "UpperBoundHz": "240"
+    },
+    "Recording0022": {
+        "FileName": "female-iphone-normal-101.wav",
+        "LowerBoundHz": "200",
+        "UpperBoundHz": "250"
+    },
+    "Recording0023": {
+        "FileName": "female-iphone-normal-102.wav",
+        "LowerBoundHz": "195",
+        "UpperBoundHz": "220"
+    },
+    "Recording0024": {
+        "FileName": "female-iphone-normal-103.wav",
+        "LowerBoundHz": "200",
+        "UpperBoundHz": "310"
+    },
+    "Recording0025": {
+        "FileName": "female-iphone-normal-104.wav",
+        "LowerBoundHz": "320",
+        "UpperBoundHz": "230"
+    },
+    "Recording0026": {
+        "FileName": "female-twitch-normal-0.wav",
+        "LowerBoundHz": "200",
+        "UpperBoundHz": "240"
+    },
+    "Recording0027": {
+        "FileName": "female-twitch-normal-1.wav",
+        "LowerBoundHz": "180",
+        "UpperBoundHz": "220"
+    },
+    "Recording0028": {
+        "FileName": "male-audacity-normal-100.wav",
+        "LowerBoundHz": "100",
+        "UpperBoundHz": "140"
+    },
+    "Recording0029": {
+        "FileName": "male-discord-high-0.wav",
+        "LowerBoundHz": "360",
+        "UpperBoundHz": "390"
+    },
+    "Recording0030": {
+        "FileName": "male-discord-high-1.wav",
+        "LowerBoundHz": "485",
+        "UpperBoundHz": "525"
+    },
+    "Recording0031": {
+        "FileName": "male-discord-high-2.wav",
+        "LowerBoundHz": "365",
+        "UpperBoundHz": "405"
+    },
+    "Recording0032": {
+        "FileName": "male-discord-high-3.wav",
+        "LowerBoundHz": "305",
+        "UpperBoundHz": "385"
+    },
+    "Recording0033": {
+        "FileName": "male-discord-low-0.wav",
+        "LowerBoundHz": "85",
+        "UpperBoundHz": "105"
+    },
+    "Recording0034": {
+        "FileName": "male-discord-low-1.wav",
+        "LowerBoundHz": "100",
+        "UpperBoundHz": "115"
+    },
+    "Recording0035": {
+        "FileName": "male-discord-low-100.wav",
+        "LowerBoundHz": "120",
+        "UpperBoundHz": "150"
+    },
+    "Recording0036": {
+        "FileName": "male-discord-low-2.wav",
+        "LowerBoundHz": "70",
+        "UpperBoundHz": "110"
+    },
+    "Recording0037": {
+        "FileName": "male-discord-low-3.wav",
+        "LowerBoundHz": "85",
+        "UpperBoundHz": "100"
+    },
+    "Recording0038": {
+        "FileName": "male-discord-normal-0.wav",
+        "LowerBoundHz": "90",
+        "UpperBoundHz": "120"
+    },
+    "Recording0039": {
+        "FileName": "male-discord-normal-1.wav",
+        "LowerBoundHz": "105",
+        "UpperBoundHz": "130"
+    },
+    "Recording0040": {
+        "FileName": "male-discord-normal-101.wav",
+        "LowerBoundHz": "135",
+        "UpperBoundHz": "180"
+    },
+    "Recording0041": {
+        "FileName": "male-discord-normal-102.wav",
+        "LowerBoundHz": "120",
+        "UpperBoundHz": "300"
+    },
+    "Recording0042": {
+        "FileName": "male-discord-normal-103.wav",
+        "LowerBoundHz": "130",
+        "UpperBoundHz": "155"
+    },
+    "Recording0043": {
+        "FileName": "male-discord-normal-2.wav",
+        "LowerBoundHz": "115",
+        "UpperBoundHz": "150"
+    },
+    "Recording0044": {
+        "FileName": "male-discord-normal-3.wav",
+        "LowerBoundHz": "80",
+        "UpperBoundHz": "140"
+    },
+    "Recording0045": {
+        "FileName": "male-discord-normal-4.wav",
+        "LowerBoundHz": "75",
+        "UpperBoundHz": "120"
+    },
+    "Recording0046": {
+        "FileName": "male-iphone-normal-100.wav",
+        "LowerBoundHz": "160",
+        "UpperBoundHz": "190"
+    },
+    "Recording0047": {
+        "FileName": "male-iphone-normal-101.wav",
+        "LowerBoundHz": "115",
+        "UpperBoundHz": "150"
+    },
+    "Recording0048": {
+        "FileName": "male-twitch-normal-0.wav",
+        "LowerBoundHz": "115",
+        "UpperBoundHz": "235"
+    },
+    "Recording0049": {
+        "FileName": "male-youtube-normal-0.wav",
+        "LowerBoundHz": "90",
+        "UpperBoundHz": "230"
+    },
+    "Recording0050": {
+        "FileName": "male-youtube-normal-4.wav",
+        "LowerBoundHz": "55",
+        "UpperBoundHz": "80"
+    }
+}
