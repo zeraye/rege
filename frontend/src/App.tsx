@@ -17,7 +17,7 @@ function App() {
         (blobFile) => new File([blobFile], "file.wav", { type: "audio/wav" })
       );
 
-    const response = await fetch("http://127.0.0.1:5000/rege", {
+    const response = await fetch("https://zeraye.pythonanywhere.com/rege", {
       method: "POST",
       body: file || recFile,
       mode: "cors",
