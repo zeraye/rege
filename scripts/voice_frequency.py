@@ -2,6 +2,7 @@ import sys
 import librosa
 import numpy as np
 
+
 def voice_frequency(audio_path: str, sr: int = 1000, deno: int = 30, freqdiff: int = 13, freqmin: int = 65) -> float:
     y, sr = librosa.load(audio_path, sr=sr)
     y_fourier = librosa.stft(y, n_fft=1024)
@@ -77,6 +78,7 @@ def voice_frequency(audio_path: str, sr: int = 1000, deno: int = 30, freqdiff: i
             return wght_avges[i]
 
     return sr / 2
+
 
 if __name__ == "__main__":
     voice_frequency(*sys.argv[1:])
