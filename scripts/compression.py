@@ -4,12 +4,13 @@ import zipfile
 import numpy as np
 import librosa
 
+
 def compression(audio_path: str, sr: int = 1000) -> object:
     size = os.path.getsize(audio_path)
 
     # Phase 1
     y, sr = librosa.load(audio_path, sr=sr)
-    
+
     S = librosa.stft(y, n_fft=1024)
 
     data = librosa.amplitude_to_db(abs(S))

@@ -2,6 +2,7 @@ import sys
 import math
 import librosa
 
+
 def check_quality(audio_path: str, ysup: int = 1000) -> int:
     # audio time series, sample_rate
     y, sr = librosa.load(audio_path)
