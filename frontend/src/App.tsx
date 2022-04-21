@@ -46,7 +46,6 @@ function App() {
   return (
     <div>
       <p>Status: {status}</p>
-      {/* <video src={mediaBlobUrl} controls /> */}
       <input type="file" onChange={uploadFile} ref={fileRef} accept=".wav" />
       <button onClick={startRecording}>Start</button>
       <button onClick={stopRecording}>Stop</button>
