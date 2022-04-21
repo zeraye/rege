@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/rege/static/css/main.b2df8fbe.css",
+    "main.js": "/rege/static/js/main.ce2344c2.js",
+    "index.html": "/rege/index.html",
+    "main.b2df8fbe.css.map": "/rege/static/css/main.b2df8fbe.css.map",
+    "main.ce2344c2.js.map": "/rege/static/js/main.ce2344c2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b2df8fbe.css",
+    "static/js/main.ce2344c2.js"
+  ]
+}
