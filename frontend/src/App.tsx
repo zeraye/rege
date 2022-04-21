@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 
 function App() {
-  const [freq, setFreq] = useState(null);
+  const [freqs, setFreqs] = useState<Float32Array[] | string | null>(null);
   const [file, setFile] = useState(null);
 
   const fileRef = useRef<any>(null);
@@ -20,11 +20,16 @@ function App() {
     const response = await fetch("http://127.0.0.1:5000/rege", {
       method: "POST",
       body: file || recFile,
+      mode: "cors",
     });
+
+    if (!response.ok) {
+      setFreqs("Error while fetching data, missing audio!");
+    }
 
     const data = await response.json();
 
-    setFreq(data["freq"]);
+    setFreqs([data["freq0"], data["freq1"]]);
   };
 
   const uploadFile = (event: any) => {
@@ -32,7 +37,7 @@ function App() {
   };
 
   const clear = (event: any) => {
-    setFreq(null);
+    setFreqs(null);
     setFile(null);
     clearBlobUrl();
     fileRef.current.value = null;
@@ -40,15 +45,29 @@ function App() {
 
   return (
     <div>
-      <p>record status: {status}</p>
-      {/* <video src={mediaBlobUrl} controls autoPlay /> */}
+      <p>Status: {status}</p>
+      {/* <video src={mediaBlobUrl} controls /> */}
       <input type="file" onChange={uploadFile} ref={fileRef} accept=".wav" />
-
-      <button onClick={startRecording}>start</button>
-      <button onClick={stopRecording}>stop</button>
-      <button onClick={clear}>clear</button>
-      <button onClick={analyse}>analyse</button>
-      <p>frequency: {freq || "-"}</p>
+      <button onClick={startRecording}>Start</button>
+      <button onClick={stopRecording}>Stop</button>
+      <button onClick={clear}>Clear</button>
+      <button onClick={analyse}>Analyse</button>
+      <p>
+        Frequency (first algorithm):{" "}
+        {typeof freqs == "object" && freqs != null
+          ? freqs[0]
+          : typeof freqs == "object"
+          ? "-"
+          : freqs}
+      </p>
+      <p>
+        Frequency (second algorithm):{" "}
+        {typeof freqs == "object" && freqs != null
+          ? freqs[1]
+          : typeof freqs == "object"
+          ? "-"
+          : freqs}
+      </p>
     </div>
   );
 }
