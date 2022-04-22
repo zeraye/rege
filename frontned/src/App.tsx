@@ -1,74 +1,121 @@
-import { useState, useRef } from "react";
-import { useReactMediaRecorder } from "react-media-recorder";
+import { useState, Fragment } from "react";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import FileUpload from "./components/FileUpload";
+import Record from "./components/Record";
+import Typography from "@mui/material/Typography";
 
-function App() {
-  const [freqs, setFreqs] = useState<Float32Array[] | string | null>(null);
-  const [file, setFile] = useState(null);
+const App = () => {
+  const [isAnalScene, setIsAnalScene] = useState(false);
+  const [freqs, setFreqs] = useState<string[]>();
+  const [file, setFile] = useState<File | null>(null);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const fileRef = useRef<any>(null);
-
-  const { status, startRecording, stopRecording, mediaBlobUrl, clearBlobUrl } =
-    useReactMediaRecorder({});
-
-  const analyse = async (event: any) => {
-    const recFile = await fetch(mediaBlobUrl!)
+  const mediaBlobUrlToFile = async (mediaBlobUrl: string) => {
+    return await fetch(mediaBlobUrl)
       .then((r) => r.blob())
       .then(
-        (blobFile) => new File([blobFile], "file.wav", { type: "audio/wav" })
+        (blobFile) => new File([blobFile], "file.wav", { type: "audio/x-wav" })
       );
+  };
 
+  const [canNext, setCanNext] = useState(false);
+
+  const fetchFreqs = async () => {
+    console.log(file);
     const response = await fetch("https://zeraye.pythonanywhere.com/rege", {
       method: "POST",
-      body: file || recFile,
+      body: file,
       mode: "cors",
     });
 
     if (!response.ok) {
-      setFreqs("Error while fetching data, missing audio!");
+      setIsError(true);
+      return;
     }
 
     const data = await response.json();
 
+    setIsLoading(false);
     setFreqs([data["freq0"], data["freq1"]]);
   };
 
-  const uploadFile = (event: any) => {
-    setFile(event.target.files[0]);
+  const canNextHandler = (data: boolean = true) => {
+    setCanNext(data);
   };
 
-  const clear = (event: any) => {
-    setFreqs(null);
-    setFile(null);
-    clearBlobUrl();
-    fileRef.current.value = null;
+  const isAnalSceneHandler = () => {
+    if (isAnalScene) setCanNext(false);
+    else fetchFreqs();
+
+    setIsAnalScene(!isAnalScene);
+    setIsLoading(true);
+    setIsError(false);
   };
+
+  const fileHandler = (data: any) => {
+    if (typeof data === "string")
+      mediaBlobUrlToFile(data).then((file) => setFile(file));
+    else if (data) {
+      setFile(data);
+    }
+  };
+
+  let content: JSX.Element = (
+    <Fragment>Unexpected error! Contact page administrator.</Fragment>
+  );
+
+  if (!isAnalScene)
+    content = (
+      <Fragment>
+        <FileUpload canNextHandler={canNextHandler} fileHandler={fileHandler} />
+        <Record canNextHandler={canNextHandler} fileHandler={fileHandler} />
+        <Button
+          variant="contained"
+          disabled={canNext ? false : true}
+          onClick={isAnalSceneHandler}
+        >
+          Check frequency
+        </Button>
+      </Fragment>
+    );
+  else if (isError)
+    content = (
+      <Fragment>
+        <Typography variant="h4">Error while fetching data!</Typography>
+      </Fragment>
+    );
+  else if (isLoading)
+    content = (
+      <Fragment>
+        <Typography variant="h4">Calculating...</Typography>
+      </Fragment>
+    );
+  else if (freqs != undefined)
+    content = (
+      <Fragment>
+        <Typography variant="h4">Rudnik's algorithm: {freqs[0]}</Typography>
+        <Typography variant="h4">Pochmara's algorithm: {freqs[1]}</Typography>
+        <Button variant="contained" onClick={isAnalSceneHandler}>
+          Analyse again
+        </Button>
+      </Fragment>
+    );
 
   return (
-    <div>
-      <p>Status: {status}</p>
-      <input type="file" onChange={uploadFile} ref={fileRef} accept=".wav" />
-      <button onClick={startRecording}>Start</button>
-      <button onClick={stopRecording}>Stop</button>
-      <button onClick={clear}>Clear</button>
-      <button onClick={analyse}>Analyse</button>
-      <p>
-        Frequency (first algorithm):{" "}
-        {typeof freqs == "object" && freqs != null
-          ? freqs[0]
-          : typeof freqs == "object"
-          ? "-"
-          : freqs}
-      </p>
-      <p>
-        Frequency (second algorithm):{" "}
-        {typeof freqs == "object" && freqs != null
-          ? freqs[1]
-          : typeof freqs == "object"
-          ? "-"
-          : freqs}
-      </p>
-    </div>
+    <Stack
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+      }}
+      alignItems="center"
+      spacing={2}
+    >
+      {content}
+    </Stack>
   );
-}
+};
 
 export default App;
