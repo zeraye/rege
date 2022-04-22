@@ -1,6 +1,6 @@
 # REGE website
 
-Website for REGE project (link will be added soon).
+Website for REGE project [here](https://zeraye.github.io/rege/).
 
 ## Installation
 
