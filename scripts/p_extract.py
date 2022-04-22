@@ -36,7 +36,7 @@ def first_harmonics(audio_path: str, check_depth: int = 5, n_fft: int = 2048) ->
     for column in range(1, data.shape[1]):
         for line in range(2, int(data.shape[0]/check_depth-1)):
             # is it a spike?
-            if data[line,column] > thresholds[column] and data[line,column] >= data[line-1,column] and data[line,column] >= data[line+1,column]:
+            if data[line,column] > thresholds[column]/2 and data[line,column] >= data[line-1,column] and data[line,column] >= data[line+1,column]:
                 # are there consecutive harmonics?
                 if check_if_harmonic(data=data,column=column,line=line,threshold=thresholds[column],depth=check_depth):
                     harmonics[column] = line * frequencies_per_bin
@@ -61,7 +61,10 @@ def values_in_range(data: np.ndarray, min: float, max: float) -> np.ndarray:
     return out
 
 def voice_frequency(audio_path: str) -> float:
-    return values_in_range(data=first_harmonics(audio_path=audio_path),min=60,max=500).mean()
+    data = values_in_range(data=first_harmonics(audio_path=audio_path),min=60,max=500)
+    if data.size == 0:
+        return 0
+    return np.median(data)
 
 if __name__ == "__main__":
     voice_frequency(*sys.argv[1:])
