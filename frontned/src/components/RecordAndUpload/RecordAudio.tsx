@@ -1,33 +1,29 @@
-import { useState, useEffect, Fragment } from "react";
+import { useEffect, Fragment } from "react";
 import Button from "@mui/material/Button";
 import { useReactMediaRecorder } from "react-media-recorder";
 
 const Record = ({ canNextHandler, fileHandler }: any) => {
-  const [isRec, setIsRec] = useState(false);
-
-  const { startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder(
-    {}
-  );
+  const { status, startRecording, stopRecording, mediaBlobUrl } =
+    useReactMediaRecorder({});
 
   useEffect(() => {
     fileHandler(mediaBlobUrl);
   }, [mediaBlobUrl, fileHandler]);
 
   const recordingHandler = () => {
-    if (isRec) {
+    if (status === "recording") {
       stopRecording();
       canNextHandler();
-    } else {
+    } else if (status === "idle" || status === "stopped") {
       startRecording();
       canNextHandler(false);
     }
-    setIsRec(!isRec);
   };
 
   return (
     <Fragment>
       <Button variant="contained" onClick={recordingHandler}>
-        {isRec ? "Stop" : "Start"} recording
+        {status === "recording" ? "Stop" : "Start"} recording
       </Button>
     </Fragment>
   );

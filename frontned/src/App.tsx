@@ -1,57 +1,70 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
+
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import FileUpload from "./components/FileUpload";
-import Record from "./components/Record";
 import Typography from "@mui/material/Typography";
 
+import RecordAndUpload from "./components/RecordAndUpload/RecordAndUpload";
+import Analyse from "./components/Analyse/Analyse";
+import Search from "./components/Search/Search";
+
 const App = () => {
-  const [isAnalScene, setIsAnalScene] = useState(false);
-  const [freqs, setFreqs] = useState<string[]>();
+  const [scene, setScene] = useState("recordAndUpload");
+  const [frequencies, setFrequencies] = useState<string[]>();
+  const [figureUrl, setFigureUrl] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [canNext, setCanNext] = useState(false);
+  const [mediaBlobUrl, setMediaBlobUrl] = useState("");
 
-  const mediaBlobUrlToFile = async (mediaBlobUrl: string) => {
-    return await fetch(mediaBlobUrl)
+  useEffect(() => {
+    setIsLoading(true);
+    setIsError(false);
+  }, [scene]);
+
+  const mediaBlobUrlToFile = async (newMediaBlobUrl: string) => {
+    setMediaBlobUrl(newMediaBlobUrl);
+
+    return await fetch(newMediaBlobUrl)
       .then((r) => r.blob())
       .then(
-        (blobFile) => new File([blobFile], "file.wav", { type: "audio/x-wav" })
+        (blobFile) =>
+          new File([blobFile], "recording.wav", { type: "audio/wav" })
       );
   };
 
-  const [canNext, setCanNext] = useState(false);
+  const fetchFrequencies = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/rege", {
+        method: "POST",
+        body: file,
+        mode: "cors",
+      });
 
-  const fetchFreqs = async () => {
-    console.log(file);
-    const response = await fetch("https://zeraye.pythonanywhere.com/rege", {
-      method: "POST",
-      body: file,
-      mode: "cors",
-    });
+      if (!response.ok) {
+        throw new Error("Error when attempting to fetch resource.");
+      }
 
-    if (!response.ok) {
+      const data = await response.json();
+
+      setIsLoading(false);
+      setFrequencies([data["frequencyRudnik"], data["frequencyPochmara"]]);
+      setFigureUrl(data["figureURL"]);
+    } catch (e) {
       setIsError(true);
-      return;
+      console.log(e);
     }
-
-    const data = await response.json();
-
-    setIsLoading(false);
-    setFreqs([data["freq0"], data["freq1"]]);
   };
 
   const canNextHandler = (data: boolean = true) => {
     setCanNext(data);
   };
 
-  const isAnalSceneHandler = () => {
-    if (isAnalScene) setCanNext(false);
-    else fetchFreqs();
-
-    setIsAnalScene(!isAnalScene);
-    setIsLoading(true);
-    setIsError(false);
+  const sceneHandler = (sceneFrom: string, sceneTo: string) => {
+    if (sceneTo === "recordAndUpload") setCanNext(false);
+    else if (sceneTo === "analyse") fetchFrequencies();
+    setScene(sceneTo);
   };
 
   const fileHandler = (data: any) => {
@@ -59,49 +72,45 @@ const App = () => {
       mediaBlobUrlToFile(data).then((file) => setFile(file));
     else if (data) {
       setFile(data);
+      setMediaBlobUrl(URL.createObjectURL(data));
     }
   };
 
-  let content: JSX.Element = (
-    <Fragment>Unexpected error! Contact page administrator.</Fragment>
+  let content = (
+    <Fragment>
+      <Typography variant="h4">
+        Unexpected error! Contact page administrator.
+      </Typography>
+      <Button
+        variant="contained"
+        onClick={() => sceneHandler("error", "recordAndUpload")}
+      >
+        Go back
+      </Button>
+    </Fragment>
   );
 
-  if (!isAnalScene)
+  if (scene === "recordAndUpload")
     content = (
-      <Fragment>
-        <FileUpload canNextHandler={canNextHandler} fileHandler={fileHandler} />
-        <Record canNextHandler={canNextHandler} fileHandler={fileHandler} />
-        <Button
-          variant="contained"
-          disabled={canNext ? false : true}
-          onClick={isAnalSceneHandler}
-        >
-          Check frequency
-        </Button>
-      </Fragment>
+      <RecordAndUpload
+        canNextHandler={canNextHandler}
+        fileHandler={fileHandler}
+        sceneHandler={sceneHandler}
+        canNext={canNext}
+      />
     );
-  else if (isError)
+  else if (scene === "analyse")
     content = (
-      <Fragment>
-        <Typography variant="h4">Error while fetching data!</Typography>
-      </Fragment>
+      <Analyse
+        frequencies={frequencies}
+        mediaBlobUrl={mediaBlobUrl}
+        figureUrl={figureUrl}
+        sceneHandler={sceneHandler}
+        isLoading={isLoading}
+        isError={isError}
+      />
     );
-  else if (isLoading)
-    content = (
-      <Fragment>
-        <Typography variant="h4">Calculating...</Typography>
-      </Fragment>
-    );
-  else if (freqs != undefined)
-    content = (
-      <Fragment>
-        <Typography variant="h4">Rudnik's algorithm: {freqs[0]}</Typography>
-        <Typography variant="h4">Pochmara's algorithm: {freqs[1]}</Typography>
-        <Button variant="contained" onClick={isAnalSceneHandler}>
-          Analyse again
-        </Button>
-      </Fragment>
-    );
+  else if (scene === "search") content = <Search />;
 
   return (
     <Stack
