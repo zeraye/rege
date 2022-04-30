@@ -3,23 +3,25 @@ import librosa
 import numpy as np
 
 
-def voice_frequency(audio_path: str, sr: int = 1000, deno: int = 30, freqdiff: int = 13, freqmin: int = 65) -> float:
-    y, sr = librosa.load(audio_path, sr=sr)
+def voice_frequency(audio_path: str, sr: int = 1000, sr_scalar: int = 22, deno: int = 30, freqdiff: int = 13, freqmin: int = 65) -> float:
+    y, _ = librosa.load(audio_path, sr=sr)
     y_fourier = librosa.stft(y, n_fft=1024)
     data = librosa.amplitude_to_db(abs(y_fourier))
+    more_sr = False
 
     minval = max(np.amax(data, axis=0)) / deno
     data = np.clip(data, minval, None)
     data -= minval
 
     if np.cumsum(data).any() == 0:
-        y, sr = librosa.load(audio_path, sr=sr*12)
+        y, sr = librosa.load(audio_path, sr=sr*sr_scalar)
         y_fourier = librosa.stft(y, n_fft=1024)
         data = librosa.amplitude_to_db(abs(y_fourier))
+        more_sr = True
 
-        minval = max(np.amax(data, axis=0)) / deno
-        data = np.clip(data, minval, None)
-        data -= minval
+        minval = max(np.amax(data, axis=0)) * 2
+        data += minval
+        data = np.clip(data, 0, None)
 
     for i in range(data.shape[1]):
         col = data[:, i]
@@ -44,7 +46,10 @@ def voice_frequency(audio_path: str, sr: int = 1000, deno: int = 30, freqdiff: i
     for i in range(len(data)):
         if sum(data[i]) > 0:
             decibels.append(sum(data[i]))
-            freqs.append(i)
+            if more_sr:
+                freqs.append(i*sr_scalar)
+            else:
+                freqs.append(i)
 
     if len(decibels) == 0:
         return 0
@@ -74,7 +79,7 @@ def voice_frequency(audio_path: str, sr: int = 1000, deno: int = 30, freqdiff: i
         wght_avges.append(wght_avge)
 
     for i in range(len(wght_avges)):
-        if wght_avges[i] > freqmin:
+        if sr / 2 > wght_avges[i] > freqmin:
             return wght_avges[i]
 
     return sr / 2
