@@ -1,32 +1,80 @@
+import os
 import json
 import uuid
-import os
+import threading
+
 from flask import Flask, request, abort
 from flask_cors import CORS
+
+from cloudinary import config
+from cloudinary.uploader import upload
+from cloudinary.api import delete_resources_by_tag
+
+from scripts.spectrogram import show_spectrogram
+
+from scripts.quality import check_quality
 from scripts.voice_frequency import voice_frequency
+from scripts.p_extract import voice_frequency as voice_frequency2
+
+import pydub
+import librosa
+import soundfile
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+config(
+    cloud_name=os.getenv("CLOUD_NAME"),
+    api_key=os.getenv("API_KEY"),
+    api_secret=os.getenv("API_SECRET")
+)
 
 app = Flask(__name__)
 
 CORS(app)
 
 
+def convert_ogg_to_wav(audio_path):
+    song = pydub.AudioSegment.from_ogg(audio_path)
+    song.export(audio_path, format="wav")
+
+
 @app.route("/rege", methods=["POST"])
 def rege():
     uid = uuid.uuid4().hex
+    audiopath = f"temp/{uid}.wav"
+    figurepath = f"figures/{uid}.png"
 
-    with open(f"temp/{uid}.wav", "wb") as f:
+    with open(audiopath, "wb") as f:
         f.write(request.data)
 
+    convert_ogg_to_wav(audiopath)
+
+    # trim silence
+    audio, sr = librosa.load(audiopath)
+    clip = librosa.effects.trim(audio, top_db=10)
+    soundfile.write(audiopath, clip[0], sr)
+
     try:
-        freq0 = voice_frequency(f"temp/{uid}.wav")
-    except:
-        os.remove(f"temp/{uid}.wav")
+        frequency = int(voice_frequency(audiopath))
+        frequency2 = int(voice_frequency2(audiopath))
+        quality = check_quality(audiopath)
+        show_spectrogram(audiopath, save=True)
+        figureURL = upload(figurepath, tags=uid)["secure_url"]
+    except Exception as e:
+        print(e)
         abort(400)
 
-    os.remove(f"temp/{uid}.wav")
+    os.remove(audiopath)
+    os.remove(figurepath)
+    threading.Timer(3600, delete_resources_by_tag, [uid]).start()
 
-    return json.dumps({"freq0": str(round(freq0, 2)) + " Hz", "freq1": "Algorithm not implemented yet!"}), 200, {"ContentType": "application/json"}
+    return json.dumps({"frequencyRudnik": frequency,
+                       "frequencyPochmara": frequency2,
+                       "quality": quality,
+                       "figureURL": figureURL}), 200, {"ContentType": "application/json"}
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
