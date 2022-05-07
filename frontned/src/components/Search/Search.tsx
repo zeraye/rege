@@ -8,16 +8,18 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 
-const Search = () => {
+const Search = ( {onFiltersChanged}: any) => {
   const [source, setSource] = useState("0");
   const [gender, setGender] = useState("0");
-  const [tone, setTone] = useState("0");
+  // const [tone, setTone] = useState("0");
   const [frequency, setFrequency] = useState([80, 120]);
 
   const selectHandler = (type: string, event: SelectChangeEvent) => {
     if (type === "source") setSource(event.target.value as string);
     else if (type === "gender") setGender(event.target.value as string);
-    else if (type === "tone") setTone(event.target.value as string);
+    // else if (type === "tone") setTone(event.target.value as string);
+
+    onFiltersChanged(source,gender,frequency);
   };
 
   const frequencyHandler = (event: Event, newFrequency: number | number[]) => {
@@ -62,7 +64,7 @@ const Search = () => {
             </Select>
           </FormControl>
         </Box>
-        <Box sx={{ minWidth: 120 }}>
+        {/* <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth>
             <InputLabel id="tone">Tone</InputLabel>
             <Select
@@ -77,7 +79,7 @@ const Search = () => {
               <MenuItem value={30}>High</MenuItem>
             </Select>
           </FormControl>
-        </Box>
+        </Box> */}
         <Box sx={{ width: 500 }}>
           <Typography gutterBottom>
             Frequency: {frequency[0]} - {frequency[1]} Hz
@@ -88,13 +90,10 @@ const Search = () => {
             max={500}
             step={5}
             onChange={frequencyHandler}
+            onChangeCommitted={() => onFiltersChanged(source,gender,frequency)}
             disableSwap
           />
         </Box>
-      </Stack>
-      <Stack direction="row">
-        <Stack>table</Stack>
-        <Stack>preview</Stack>
       </Stack>
     </Stack>
   );
