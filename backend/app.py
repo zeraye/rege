@@ -36,7 +36,7 @@ CORS(app)
 
 
 def convert_ogg_to_wav(audio_path):
-    song = pydub.AudioSegment.from_ogg(audio_path)
+    song = pydub.AudioSegment.from_file(audio_path)
     song.export(audio_path, format="wav")
 
 
@@ -75,6 +75,28 @@ def rege():
                        "quality": quality,
                        "figureURL": figureURL}), 200, {"ContentType": "application/json"}
 
+@app.route("/regeSearch", methods=["POST"])
+def search():
+    return json.dumps([ {"filename": "test1",
+                        "source": "debug",
+                        "gender": "apache heli",
+                        "frequency": 69 },
+                        {"filename": "test2",
+                        "source": "debug",
+                        "gender": "apache heli",
+                        "frequency": 420 },
+                        {"filename": "test3",
+                        "source": "debug",
+                        "gender": "apache heli",
+                        "frequency": 2137 },
+                        {"filename": "test4",
+                        "source": "debug",
+                        "gender": "apache heli",
+                        "frequency": 71830 },
+                        {"filename": "test5",
+                        "source": "debug",
+                        "gender": "apache heli",
+                        "frequency": 5318008 } ])
 
 if __name__ == "__main__":
     app.run(debug=True)
