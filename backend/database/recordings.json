@@ -1,0 +1,304 @@
+{
+	"recordings": [
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 144,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957646/gxvufn7b8kypdgh9afhx.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 99,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957647/efngs00gu8twvj0lc8qt.png"
+		},
+		{
+			"source": "audacity",
+			"gender": "female",
+			"frequency": 128,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957648/zctyzeyul3ix5qvmwfbo.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 129,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957649/rwatm5tayqdfvizdfzkk.png"
+		},
+		{
+			"source": "audacity",
+			"gender": "female",
+			"frequency": 218,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957650/vbzefhpu28zethchdruw.png"
+		},
+		{
+			"source": "discord",
+			"gender": "female",
+			"frequency": 0,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957651/ow1l2uao8ubymqdzxre0.png"
+		},
+		{
+			"source": "audacity",
+			"gender": "male",
+			"frequency": 121,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957652/w2if33vx2z5gssvsljwo.png"
+		},
+		{
+			"source": "iphone",
+			"gender": "female",
+			"frequency": 194,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957653/jkeoiifebs7gwffswb4v.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 100,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957654/qwjl8y0pzzndl7kbli1v.png"
+		},
+		{
+			"source": "iphone",
+			"gender": "male",
+			"frequency": 105,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957656/imgts9cxe0g18iwkhnow.png"
+		},
+		{
+			"source": "youtube",
+			"gender": "male",
+			"frequency": 102,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957658/hckxgdsvizidmyi3auus.png"
+		},
+		{
+			"source": "twitch",
+			"gender": "female",
+			"frequency": 196,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957659/dywata9pchj08cm6ibkg.png"
+		},
+		{
+			"source": "iphone",
+			"gender": "female",
+			"frequency": 470,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957660/gak9eqtuhups27v7tjle.png"
+		},
+		{
+			"source": "iphone",
+			"gender": "female",
+			"frequency": 219,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957661/pf3fiwhzae08b7wtdg82.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 126,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957662/wwzbxsxj7erhyrjkbpfp.png"
+		},
+		{
+			"source": "twitch",
+			"gender": "female",
+			"frequency": 146,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957665/fzdgbrhciszk82zdnwku.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 334,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957666/n5bs0vegoifxeipgltl3.png"
+		},
+		{
+			"source": "twitch",
+			"gender": "male",
+			"frequency": 155,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957667/n3ttgntfwxxkac4zcmx7.png"
+		},
+		{
+			"source": "iphone",
+			"gender": "female",
+			"frequency": 244,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957669/ugmawjncufdnnyizmnrr.png"
+		},
+		{
+			"source": "youtube",
+			"gender": "male",
+			"frequency": 125,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957670/mxigadj7wtkplttrpal0.png"
+		},
+		{
+			"source": "iphone",
+			"gender": "female",
+			"frequency": 226,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957671/mnz6fmfcwloyxh66gfnj.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 98,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957672/pmtlqckjmyggwr5p7ica.png"
+		},
+		{
+			"source": "audacity",
+			"gender": "female",
+			"frequency": 209,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957672/wc0vvvaunkoapr1yycmz.png"
+		},
+		{
+			"source": "audacity",
+			"gender": "female",
+			"frequency": 172,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957673/k7floq4bauuzlj36pqjl.png"
+		},
+		{
+			"source": "audacity",
+			"gender": "female",
+			"frequency": 197,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957674/xpx7ey98i19xwfn7e9fv.png"
+		},
+		{
+			"source": "audacity",
+			"gender": "female",
+			"frequency": 207,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957675/cwion9gvf1v8htf8p5zs.png"
+		},
+		{
+			"source": "iphone",
+			"gender": "female",
+			"frequency": 98,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957676/ktleofujkuksdi496nca.png"
+		},
+		{
+			"source": "discord",
+			"gender": "female",
+			"frequency": 189,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957677/euuqncnipstypzhhoc9p.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 100,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957678/fgrs7eshv7oa2jcohwly.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 120,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957679/huf4vekxqo4vuxkmropm.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 500,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957680/zxc9ov4pni46jmfawkky.png"
+		},
+		{
+			"source": "audacity",
+			"gender": "female",
+			"frequency": 239,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957681/qj9n2wao3sd9icd2dpzl.png"
+		},
+		{
+			"source": "iphone",
+			"gender": "female",
+			"frequency": 239,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957682/zot8ly2jkg8beayyzfiy.png"
+		},
+		{
+			"source": "audacity",
+			"gender": "female",
+			"frequency": 185,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957683/myliuitkfkvjdjtrgydj.png"
+		},
+		{
+			"source": "discord",
+			"gender": "female",
+			"frequency": 204,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957683/edmlxm69eqjgzox0xbxn.png"
+		},
+		{
+			"source": "iphone",
+			"gender": "female",
+			"frequency": 221,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957684/lxrtkwkfc8cp03v10e3b.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 381,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957685/fbtf4hiqilowptvdkb8v.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 131,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957686/cbdodwzo3uy72ozogjtg.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 98,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957687/s6xh89saoaodzj2ibswq.png"
+		},
+		{
+			"source": "audacity",
+			"gender": "female",
+			"frequency": 303,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957688/h358mdi1jvh7mmx6rind.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 99,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957689/lkdisn0deazcgdzqf9jf.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 372,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957690/xbbdkvbmijxsgcccml3o.png"
+		},
+		{
+			"source": "audacity",
+			"gender": "female",
+			"frequency": 497,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957691/mawirryjmu92qnyew4hd.png"
+		},
+		{
+			"source": "iphone",
+			"gender": "female",
+			"frequency": 396,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957693/mesf5jibavkmly4wnlfm.png"
+		},
+		{
+			"source": "audacity",
+			"gender": "female",
+			"frequency": 500,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957694/rtu3bdfttm9yereapy9b.png"
+		},
+		{
+			"source": "audacity",
+			"gender": "female",
+			"frequency": 481,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957695/yob40p3gpf5pw1dalsnn.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 172,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957698/jkbzeccd1keemecvphaa.png"
+		},
+		{
+			"source": "iphone",
+			"gender": "male",
+			"frequency": 109,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957699/gqhanruzynbiocbzngoy.png"
+		},
+		{
+			"source": "discord",
+			"gender": "male",
+			"frequency": 129,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957701/necaij3vwys6dbxjkux0.png"
+		},
+		{
+			"source": "iphone",
+			"gender": "female",
+			"frequency": 209,
+			"figureURL": "https://res.cloudinary.com/zeraye/image/upload/v1651957702/rshfjgjolcmdefirgsf4.png"
+		}
+	]
+}
