@@ -1,9 +1,14 @@
-import sys
-import librosa
-import numpy as np
+from . import sys, librosa, np
 
 
-def voice_frequency(audio_path: str, sr: int = 1000, sr_scalar: int = 22, deno: int = 30, freqdiff: int = 13, freqmin: int = 65) -> float:
+def voice_frequency(
+    audio_path: str,
+    sr: int = 1000,
+    sr_scalar: int = 22,
+    deno: int = 30,
+    freqdiff: int = 13,
+    freqmin: int = 65,
+) -> float:
     y, _ = librosa.load(audio_path, sr=sr)
     y_fourier = librosa.stft(y, n_fft=1024)
     data = librosa.amplitude_to_db(abs(y_fourier))
@@ -14,7 +19,7 @@ def voice_frequency(audio_path: str, sr: int = 1000, sr_scalar: int = 22, deno: 
     data -= minval
 
     if np.cumsum(data).any() == 0:
-        y, sr = librosa.load(audio_path, sr=sr*sr_scalar)
+        y, sr = librosa.load(audio_path, sr=sr * sr_scalar)
         y_fourier = librosa.stft(y, n_fft=1024)
         data = librosa.amplitude_to_db(abs(y_fourier))
         more_sr = True
@@ -26,17 +31,17 @@ def voice_frequency(audio_path: str, sr: int = 1000, sr_scalar: int = 22, deno: 
     for i in range(data.shape[1]):
         col = data[:, i]
 
-        for i in range(len(col)-1):
+        for i in range(len(col) - 1):
             if col[i] > 0:
                 cumsum = 0
 
-                for j in range(len(col)-1):
-                    if col[i+j] <= 0:
-                        col[i + j//2] = int(cumsum / j)
+                for j in range(len(col) - 1):
+                    if col[i + j] <= 0:
+                        col[i + j // 2] = int(cumsum / j)
                         break
 
-                    cumsum += col[i+j]
-                    col[i+j] = 0
+                    cumsum += col[i + j]
+                    col[i + j] = 0
 
     data = data.tolist()
 
@@ -47,7 +52,7 @@ def voice_frequency(audio_path: str, sr: int = 1000, sr_scalar: int = 22, deno: 
         if sum(data[i]) > 0:
             decibels.append(sum(data[i]))
             if more_sr:
-                freqs.append(i*sr_scalar)
+                freqs.append(i * sr_scalar)
             else:
                 freqs.append(i)
 
@@ -59,7 +64,7 @@ def voice_frequency(audio_path: str, sr: int = 1000, sr_scalar: int = 22, deno: 
     freq_db_over_zero = [[(freqs[0], decibels[0])]]
 
     for i in range(1, len(freqs)):
-        if abs(freqs[i]-freq_db_over_zero[counter][-1][0]) >= freqdiff:
+        if abs(freqs[i] - freq_db_over_zero[counter][-1][0]) >= freqdiff:
             counter += 1
             freq_db_over_zero.append([])
 
