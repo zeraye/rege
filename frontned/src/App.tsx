@@ -10,6 +10,19 @@ import Search from "./components/Search/Search";
 import Table, { SearchResult } from "./components/Search/Table"
 import ItemDisplay from "./components/Search/ItemDisplay"
 
+class Filters {
+  source: string;
+  gender: string;
+  frequency: number[];
+  range: number[];
+  constructor (source: string, gender: string, frequency: number[], range: number[]) {
+    this.source = source;
+    this.gender = gender;
+    this.frequency = frequency;
+    this.range = range;
+  }
+}
+
 const App = () => {
   const [scene, setScene] = useState("search");
   const [frequencies, setFrequencies] = useState<string[]>();
@@ -20,6 +33,8 @@ const App = () => {
   const [canNext, setCanNext] = useState(false);
   const [mediaBlobUrl, setMediaBlobUrl] = useState("");
   const [rows, setRows] = useState<SearchResult[]>([]);
+  const [resultCount, setResultCount] = useState(50);
+  const [lastFilters, setLastFilters] = useState(new Filters("0","0",[80,120],[0,4]))
   
   useEffect(() => {
     setIsLoading(true);
@@ -64,20 +79,9 @@ const App = () => {
     setCanNext(data);
   };
 
-  class Filters {
-    source: string;
-    gender: string;
-    frequency: number[];
-    constructor (source: string, gender: string, frequency: number[]) {
-      this.source = source;
-      this.gender = gender;
-      this.frequency = frequency;
-    }
-  }
-
   const fetchSearchResults = async (filters : Filters) => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/regeSearch", {
+      const response = await fetch("http://127.0.0.1:5000/rege/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(filters),
@@ -90,7 +94,8 @@ const App = () => {
 
       const data = await response.json();
       
-      setRows(data);
+      setRows(data["recordings"].map( (entry: any) => new SearchResult(entry.source,entry.gender,entry.frequency) ));
+      setResultCount(data["count"]);
     } catch (e) {
       setIsError(true);
       console.log(e);
@@ -98,8 +103,7 @@ const App = () => {
   }
   
   const onRowClick = (id: number) => {
-    setRows(rows.map((row) => row.indeksik === id ? {...row, higlight: true} : {...row, higlight: false}));
-    console.log(rows);
+    setRows(rows.map((row) => row.id === id ? {...row, highlight: true} : {...row, highlight: false}));
 
     // and display stuff on the right
   }
@@ -107,7 +111,7 @@ const App = () => {
   const sceneHandler = (sceneFrom: string, sceneTo: string) => {
     if (sceneTo === "recordAndUpload") setCanNext(false);
     else if (sceneTo === "analyse") fetchFrequencies();
-    else if (sceneTo === "search") fetchSearchResults(new Filters('','',[0,0]))
+    else if (sceneTo === "search") fetchSearchResults(new Filters("0","0",[80,120],[0,4]))
     setScene(sceneTo);
   };
 
@@ -161,7 +165,12 @@ const App = () => {
         spacing={2}
         alignItems="center"
       >
-        <Search onFiltersChanged={async (source: string,gender: string,frequency: number[]) => await fetchSearchResults(new Filters(source,gender,frequency))}/>
+        <Search
+          onFiltersChanged={async (source: string, gender: string, frequency: number[]) => {
+            setLastFilters(new Filters(source,gender,frequency,lastFilters.range));
+            await fetchSearchResults(lastFilters);
+          }}
+        />
         <Stack
           direction="row"
           spacing={2}
@@ -169,6 +178,12 @@ const App = () => {
           <Table
             data={rows}
             onRowClick={onRowClick}
+            range={Math.floor(lastFilters.range[0]/5)}
+            onRangeChanged={async (page: number) => {
+              setLastFilters(new Filters(lastFilters.source,lastFilters.gender,lastFilters.frequency,[page*5,page*5+4]));
+              await fetchSearchResults(lastFilters);
+            }}
+            resultCount={resultCount}
           />
           <ItemDisplay />
         </Stack>
