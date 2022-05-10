@@ -51,6 +51,7 @@ def analyse():
             {
                 "frequency": int(frequency),
                 "figureURL": plot_url,
+                "gender": utils.gender_recognition(audio_path),
             }
         ),
         200,
