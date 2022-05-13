@@ -1,9 +1,10 @@
-from . import json, typing
+from . import json
+from typing import Dict, List, Union, Tuple
 
 
 def validate_recording(
-    recording: typing.Dict[str, typing.Union[str, int]],
-    params: typing.Dict[str, typing.Union[str, typing.List[int]]],
+    recording: Dict[str, Union[str, int]],
+    params: Dict[str, Union[str, List[int]]],
 ) -> bool:
     if params["source"] != "all" and recording["source"] != params["source"]:
         return False
@@ -21,8 +22,8 @@ def validate_recording(
 
 
 def search_recordings(
-    params: typing.Dict[str, typing.Union[str, typing.List[int]]],
-) -> typing.Tuple[typing.List[typing.Dict[str, typing.Union[str, int]]], int]:
+    params: Dict[str, Union[str, List[int]]],
+) -> Tuple[List[Dict[str, Union[str, int]]], int]:
     with open("database/recordings.json") as file:
         data = json.load(file)
 
