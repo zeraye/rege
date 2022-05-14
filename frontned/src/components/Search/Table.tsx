@@ -12,14 +12,16 @@ export class SearchResult {
   static ID_counter = 0;
   source: string;
   gender: string;
-  highlight: boolean
+  highlight: boolean; // only the row clicked by the user will be highlighted
   frequency: number;
+  figureURL: string;
   id: number;
-  constructor (source: string, gender: string, frequency: number) {
+  constructor (source: string, gender: string, frequency: number, figureURL: any) {
     this.source = source;
     this.gender = gender;
     this.highlight = false;
     this.frequency = frequency;
+    this.figureURL = figureURL;
     this.id = SearchResult.ID_counter;
     SearchResult.ID_counter++;
   }
