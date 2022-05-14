@@ -10,8 +10,8 @@ def are_close(first: float, second: float, threshold: float) -> bool:
 def voice_frequency(
     path: str, proximity_treshold: float = 10, antiproximity_treshold: float = 200
 ) -> float:
-    pochmara = pvf(path)
-    rudnik = rvf(path)
+    pochmara = pvf.voice_frequency(path)
+    rudnik = rvf.voice_frequency(path)
 
     # check for clear mistakes
     if (pochmara < 50 or pochmara > 600) and (rudnik < 50 or rudnik > 600):
