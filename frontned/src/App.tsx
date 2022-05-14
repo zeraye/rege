@@ -97,9 +97,8 @@ const App = () => {
       }
 
       const data = await response.json();
-      console.log(data);
       
-      setRows(data["recordings"].map((entry: any) => new SearchResult(entry.source, entry.gender, entry.frequency)));
+      setRows(data["recordings"].map((entry: any) => new SearchResult(entry.source, entry.gender, entry.frequency, entry.figureURL)));
       setResultCount(data["count"]);
     } catch (e) {
       setIsError(true);
