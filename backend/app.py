@@ -42,6 +42,8 @@ def analyse():
 
     plot_url = upload(plot_object, tags=uid)["secure_url"]
 
+    gender = utils.gender_recognition(audio_path)
+
     os.remove(audio_path)
 
     threading.Timer(300, delete_resources_by_tag, [uid]).start()
@@ -51,7 +53,7 @@ def analyse():
             {
                 "frequency": int(frequency),
                 "figureURL": plot_url,
-                "gender": utils.gender_recognition(audio_path),
+                "gender": gender,
             }
         ),
         200,
