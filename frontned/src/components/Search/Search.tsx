@@ -11,14 +11,11 @@ import Typography from "@mui/material/Typography";
 const Search = ({onFiltersChanged}: any) => {
   const [source, setSource] = useState("all");
   const [gender, setGender] = useState("all");
-  // const [tone, setTone] = useState("0");
   const [frequency, setFrequency] = useState([80, 120]);
 
   const selectHandler = (type: string, event: SelectChangeEvent) => {
     if (type === "source") setSource(event.target.value as string);
     else if (type === "gender") setGender(event.target.value as string);
-
-    onFiltersChanged(source,gender,frequency);
   };
 
   const frequencyHandler = (event: Event, newFrequency: number | number[]) => {
@@ -37,7 +34,10 @@ const Search = ({onFiltersChanged}: any) => {
               labelId="source"
               value={source}
               label="Source"
-              onChange={(e) => selectHandler("source", e)}
+              onChange={(e) => {
+                onFiltersChanged(e.target.value,gender,frequency);
+                selectHandler("source", e)
+              }}
             >
               <MenuItem value="all">All</MenuItem>
               <MenuItem value="audacity">Audacity</MenuItem>
@@ -55,7 +55,10 @@ const Search = ({onFiltersChanged}: any) => {
               labelId="gender"
               value={gender}
               label="Gender"
-              onChange={(e) => selectHandler("gender", e)}
+              onChange={(e) => {
+                onFiltersChanged(source,e.target.value,frequency);
+                selectHandler("gender", e);
+              }}
             >
               <MenuItem value="all">All</MenuItem>
               <MenuItem value="male">Male</MenuItem>

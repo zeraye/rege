@@ -15,7 +15,7 @@ class Filters {
   gender: string;
   frequency: number[];
   range: number[];
-  constructor (source: string, gender: string, frequency: number[], range: number[]) {
+  constructor(source: string, gender: string, frequency: number[], range: number[]) {
     this.source = source;
     this.gender = gender;
     this.frequency = frequency;
@@ -24,7 +24,7 @@ class Filters {
 }
 
 const App = () => {
-  const [scene, setScene] = useState("search");
+  const [scene, setScene] = useState("recordAndUpload");
   const [frequencies, setFrequencies] = useState<string[]>();
   const [figureUrl, setFigureUrl] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -34,38 +34,42 @@ const App = () => {
   const [mediaBlobUrl, setMediaBlobUrl] = useState("");
   const [rows, setRows] = useState<SearchResult[]>([]);
   const [resultCount, setResultCount] = useState(50);
-  const [lastFilters, setLastFilters] = useState(new Filters("0","0",[80,120],[0,4]))
-  
+  const [lastFilters, setLastFilters] = useState(new Filters("all", "all", [80, 120], [0, 4]))
+
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
   }, [scene]);
 
+  useEffect( () => {
+    fetchSearchResults(lastFilters);
+  }, [lastFilters])
+
   const mediaBlobUrlToFile = async (newMediaBlobUrl: string) => {
     setMediaBlobUrl(newMediaBlobUrl);
-    
+
     return await fetch(newMediaBlobUrl)
-    .then((r) => r.blob())
+      .then((r) => r.blob())
       .then(
         (blobFile) =>
           new File([blobFile], "recording.wav", { type: "audio/wav" })
-          );
+      );
   };
-  
+
   const fetchFrequencies = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/rege", {
+      const response = await fetch("http://127.0.0.1:5000/rege/analyse", {
         method: "POST",
         body: file,
         mode: "cors",
       });
-      
+
       if (!response.ok) {
         throw new Error("Error when attempting to fetch resource.");
       }
 
       const data = await response.json();
-      
+
       setIsLoading(false);
       setFrequencies([data["frequencyRudnik"], data["frequencyPochmara"]]);
       setFigureUrl(data["figureURL"]);
@@ -74,12 +78,12 @@ const App = () => {
       console.log(e);
     }
   };
-  
+
   const canNextHandler = (data: boolean = true) => {
     setCanNext(data);
   };
 
-  const fetchSearchResults = async (filters : Filters) => {
+  const fetchSearchResults = async (filters: Filters) => {
     try {
       const response = await fetch("http://127.0.0.1:5000/rege/search", {
         method: "POST",
@@ -87,23 +91,24 @@ const App = () => {
         body: JSON.stringify(filters),
         mode: "cors",
       });
-      
+
       if (!response.ok) {
         throw new Error("Error when attempting to fetch resource.");
       }
 
       const data = await response.json();
+      console.log(data);
       
-      setRows(data["recordings"].map( (entry: any) => new SearchResult(entry.source,entry.gender,entry.frequency) ));
+      setRows(data["recordings"].map((entry: any) => new SearchResult(entry.source, entry.gender, entry.frequency)));
       setResultCount(data["count"]);
     } catch (e) {
       setIsError(true);
       console.log(e);
     }
   }
-  
+
   const onRowClick = (id: number) => {
-    setRows(rows.map((row) => row.id === id ? {...row, highlight: true} : {...row, highlight: false}));
+    setRows(rows.map((row) => row.id === id ? { ...row, highlight: true } : { ...row, highlight: false }));
 
     // and display stuff on the right
   }
@@ -111,7 +116,10 @@ const App = () => {
   const sceneHandler = (sceneFrom: string, sceneTo: string) => {
     if (sceneTo === "recordAndUpload") setCanNext(false);
     else if (sceneTo === "analyse") fetchFrequencies();
-    else if (sceneTo === "search") fetchSearchResults(new Filters("0","0",[80,120],[0,4]))
+    else if (sceneTo === "search") {
+      if (sceneFrom === "analyse") fetchSearchResults(lastFilters);
+      else fetchSearchResults(lastFilters);
+    }
     setScene(sceneTo);
   };
 
@@ -167,8 +175,7 @@ const App = () => {
       >
         <Search
           onFiltersChanged={async (source: string, gender: string, frequency: number[]) => {
-            setLastFilters(new Filters(source,gender,frequency,lastFilters.range));
-            await fetchSearchResults(lastFilters);
+            setLastFilters(new Filters(source, gender, frequency, [0,4]));
           }}
         />
         <Stack
@@ -178,10 +185,9 @@ const App = () => {
           <Table
             data={rows}
             onRowClick={onRowClick}
-            range={Math.floor(lastFilters.range[0]/5)}
+            range={Math.floor(lastFilters.range[0] / 5)}
             onRangeChanged={async (page: number) => {
-              setLastFilters(new Filters(lastFilters.source,lastFilters.gender,lastFilters.frequency,[page*5,page*5+4]));
-              await fetchSearchResults(lastFilters);
+              setLastFilters(new Filters(lastFilters.source, lastFilters.gender, lastFilters.frequency, [page * 5, page * 5 + 4]));
             }}
             resultCount={resultCount}
           />

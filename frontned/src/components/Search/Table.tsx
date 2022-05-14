@@ -27,25 +27,26 @@ export class SearchResult {
 
 export default function ResultsTable( {data, onRowClick, range, onRangeChanged, resultCount}: any) {
   return (
-    <TableContainer component={Paper} sx={{ width: 'fit-content'}}>
-      <Table sx={{ minWidth: '50%' }} aria-label='simple table'>
+    <TableContainer component={Paper} sx={{width: '300px'}}>
+      <Table aria-label='simple table'>
         <TableHead>
           <TableRow>
-            <TableCell align="center">Source</TableCell>
-            <TableCell align="center">Gender</TableCell>
-            <TableCell align="center">Frequency</TableCell>
+            <TableCell sx={{width: '34%'}} align="center">Source</TableCell>
+            <TableCell sx={{width: '33%'}} align="center">Gender</TableCell>
+            <TableCell sx={{width: '33%'}} align="center">Frequency</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody >
           {data.map((row: SearchResult) => (
             <TableRow
+              sx={{width: '100%'}}
               onClick={ () => {onRowClick(row.id)} }
               key={row.id}
               style={{ cursor: 'pointer', backgroundColor: row.highlight ? '#171717' : '#232323' }}
             >
-              <TableCell align="center">{row.source}</TableCell>
-              <TableCell align="center">{row.gender}</TableCell>
-              <TableCell align="center">{row.frequency}</TableCell>
+              <TableCell sx={{width: '34%'}} align="center">{row.source}</TableCell>
+              <TableCell sx={{width: '33%'}} align="center">{row.gender}</TableCell>
+              <TableCell sx={{width: '33%'}} align="center">{row.frequency}</TableCell>
             </TableRow>
           ))}
         </TableBody>
