@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/rege/static/css/main.fb2bfc25.css",
-    "main.js": "/rege/static/js/main.4242975d.js",
+    "main.js": "/rege/static/js/main.fbf14c4c.js",
     "index.html": "/rege/index.html",
     "main.fb2bfc25.css.map": "/rege/static/css/main.fb2bfc25.css.map",
-    "main.4242975d.js.map": "/rege/static/js/main.4242975d.js.map"
+    "main.fbf14c4c.js.map": "/rege/static/js/main.fbf14c4c.js.map"
   },
   "entrypoints": [
     "static/css/main.fb2bfc25.css",
-    "static/js/main.4242975d.js"
+    "static/js/main.fbf14c4c.js"
   ]
 }
