@@ -13,8 +13,8 @@ def validate_recording(
         return False
 
     if (
-        params["frequency"][0] > recording["frequency"]
-        or recording["frequency"] > params["frequency"][1]
+        params["frequencyRange"][0] > recording["frequency"]
+        or recording["frequency"] > params["frequencyRange"][1]
     ):
         return False
 
@@ -35,6 +35,6 @@ def search_recordings(
         )
     )
 
-    return valid_recordigs[params["range"][0] : params["range"][1] + 1], len(
-        valid_recordigs
-    )
+    return valid_recordigs[
+        params["recordingsRange"][0] : params["recordingsRange"][1] + 1
+    ], len(valid_recordigs)
