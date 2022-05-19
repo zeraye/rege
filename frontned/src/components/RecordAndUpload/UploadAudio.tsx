@@ -1,12 +1,19 @@
-import { Fragment } from "react";
-import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
+import { Fragment } from 'react';
 
-const Input = styled("input")({
-  display: "none",
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+
+const Input = styled('input')({
+  display: 'none',
 });
 
-const FileUpload = ({ canNextHandler, fileHandler }: any) => {
+interface FileUploadProps {
+  recordingHandler: (recording: File | string) => void;
+}
+
+const FileUpload = ({ recordingHandler }: FileUploadProps) => {
   return (
     <Fragment>
       <label htmlFor="contained-button-file">
@@ -15,12 +22,16 @@ const FileUpload = ({ canNextHandler, fileHandler }: any) => {
           id="contained-button-file"
           multiple
           type="file"
-          onChange={(event: any) => {
-            fileHandler(event.target.files[0]);
-            canNextHandler();
+          onChange={(event) => {
+            if (!event.target.files) return;
+            recordingHandler(event.target.files[0]);
           }}
         />
-        <Button variant="contained" component="span">
+        <Button
+          variant="contained"
+          startIcon={<DriveFolderUploadIcon />}
+          component="span"
+        >
           Upload file
         </Button>
       </label>
