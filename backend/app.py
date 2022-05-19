@@ -67,8 +67,10 @@ def search():
 
     recordings, count = utils.search_recordings(params)
 
+    recordings = sorted(recordings, key=lambda recording: recording["frequency"])
+
     return json.dumps({"recordings": recordings, "count": count})
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
