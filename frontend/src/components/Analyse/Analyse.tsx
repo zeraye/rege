@@ -76,6 +76,7 @@ const Analyse = ({
   };
 
   useEffect(() => {
+    setLoading(true);
     fetchRecordingAnalyse();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -89,7 +90,7 @@ const Analyse = ({
         <Button
           variant="contained"
           startIcon={<HomeIcon />}
-          onClick={() => pageHandler('home')}
+          onClick={() => pageHandler('recordAndUpload')}
         >
           Go home
         </Button>

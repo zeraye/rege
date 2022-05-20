@@ -4,16 +4,15 @@ import Stack from '@mui/material/Stack';
 
 import RecordAndUpload from './components/RecordAndUpload/RecordAndUpload';
 import Analyse from './components/Analyse/Analyse';
-import Home from './components/Home/Home';
-import Game from './components/Game/Game';
+import SpeakSpread from './components/SpeakSpread/SpeakSpread';
 import Search, { Filters } from './components/Search/Search';
 
 import { MIN_FREQUENCY, MAX_FREQUENCY, DELTA_FREQUENCY } from './constants';
 
-export type Page = 'home' | 'game' | 'recordAndUpload' | 'analyse' | 'search';
+export type Page = 'speakSpread' | 'recordAndUpload' | 'analyse' | 'search';
 
 const App = () => {
-  const [page, setPage] = useState<Page>('home');
+  const [page, setPage] = useState<Page>('recordAndUpload');
   const [mediaBlobUrl, setMediaBlobUrl] = useState<string>();
   const [file, setFile] = useState<File>();
   const [defaultFilters, setDefaultFilters] = useState<Filters>({
@@ -51,9 +50,7 @@ const App = () => {
 
   let content = <Fragment></Fragment>;
 
-  if (page === 'home') content = <Home pageHandler={pageHandler} />;
-  else if (page === 'game') content = <Game pageHandler={pageHandler} />;
-  else if (page === 'recordAndUpload')
+  if (page === 'recordAndUpload')
     content = (
       <RecordAndUpload
         file={file}
@@ -62,6 +59,8 @@ const App = () => {
         mediaBlobUrlHandler={mediaBlobUrlHandler}
       />
     );
+  else if (page === 'speakSpread')
+    content = <SpeakSpread file={file} pageHandler={pageHandler} />;
   else if (page === 'analyse')
     content = (
       <Analyse

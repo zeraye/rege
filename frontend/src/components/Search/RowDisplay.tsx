@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 
-import HomeIcon from '@mui/icons-material/Home';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/src/styles.scss';
@@ -63,10 +63,10 @@ const RowDisplay = ({ row, pageHandler }: RowDisplayProps) => {
       )}
       <Button
         variant="contained"
-        startIcon={<HomeIcon />}
-        onClick={() => pageHandler('home')}
+        startIcon={<AutorenewIcon />}
+        onClick={() => pageHandler('recordAndUpload')}
       >
-        Go home
+        Analyse again
       </Button>
     </Stack>
   );

@@ -17,7 +17,10 @@ export const ROW_DISPLAY_WIDTH = 385;
 export const ANALYSE_ENDPOINT =
   'https://zeraye.pythonanywhere.com/rege/analyse';
 export const SEARCH_ENDPOINT = 'https://zeraye.pythonanywhere.com/rege/search';
+export const SPEAK_SPREAD_ENDPOINT =
+  'https://zeraye.pythonanywhere.com/rege/speak-spread';
 
 // Development endpoints
 // export const ANALYSE_ENDPOINT = 'http://127.0.0.1:5000/rege/analyse';
 // export const SEARCH_ENDPOINT = 'http://127.0.0.1:5000/rege/search';
+// export const SPEAK_SPREAD_ENDPOINT = 'http://127.0.0.1:5000/rege/speak-spread';

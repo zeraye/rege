@@ -5,7 +5,7 @@ import UploadAudio from './UploadAudio';
 import RecordAudio from './RecordAudio';
 
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
-import HomeIcon from '@mui/icons-material/Home';
+import InterpreterModeIcon from '@mui/icons-material/InterpreterMode';
 
 import { Page } from '../../App';
 
@@ -55,10 +55,11 @@ const RecordAndUpload = ({
       </Button>
       <Button
         variant="contained"
-        startIcon={<HomeIcon />}
-        onClick={() => pageHandler('home')}
+        startIcon={<InterpreterModeIcon />}
+        disabled={!file}
+        onClick={() => pageHandler('speakSpread')}
       >
-        Go home
+        Speak spread
       </Button>
     </Fragment>
   );
