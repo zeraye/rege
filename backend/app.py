@@ -72,5 +72,35 @@ def search():
     return json.dumps({"recordings": recordings, "count": count})
 
 
+@app.route("/rege/speak-spread", methods=["POST"])
+def speak_spread():
+    uid = uuid.uuid4().hex
+
+    audio_path = f"temp/{uid}.wav"
+
+    with open(audio_path, "wb") as file:
+        file.write(request.data)
+
+    utils.convert_ogg_to_wav(audio_path)
+
+    utils.trim_silence(audio_path)
+
+    male, female, silence = utils.speak_spread(audio_path)
+
+    os.remove(audio_path)
+
+    return (
+        json.dumps(
+            {
+                "male-speak-spread": int(male),
+                "female-speak-spread": int(female),
+                "silence-speak-spread": 100 - int(male) - int(female),
+            }
+        ),
+        200,
+        {"ContentType": "application/json"},
+    )
+
+
 if __name__ == "__main__":
     app.run()

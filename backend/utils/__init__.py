@@ -5,6 +5,7 @@ import math
 import json
 import zipfile
 import pydub
+import pydub.utils
 import librosa
 import typing
 import librosa.display as disp
@@ -21,3 +22,6 @@ from .voice_frequency1 import voice_frequency as voice_frequency1
 from .voice_frequency2 import voice_frequency as voice_frequency2
 from .voice_frequency3 import voice_frequency as voice_frequency3
 from .trim_silence import trim_silence
+from .chunk_audio import chunk_audio
+from .speak_spread import speak_spread
+from .check_silence import check_silence
