@@ -52,12 +52,14 @@ const RowDisplay = ({ row, pageHandler }: RowDisplayProps) => {
           />
         </Fragment>
       ) : (
-        <Skeleton
-          variant="rectangular"
-          animation="pulse"
-          height={ROW_DISPLAY_HEIGHT}
-          width={ROW_DISPLAY_WIDTH}
-        />
+        <Stack ml={2}>
+          <Skeleton
+            variant="rectangular"
+            animation="pulse"
+            height={ROW_DISPLAY_HEIGHT - 15}
+            width={ROW_DISPLAY_WIDTH}
+          />
+        </Stack>
       )}
       <Button
         variant="contained"
