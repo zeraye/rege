@@ -36,6 +36,9 @@ def voice_frequency(
                 cumsum = 0
 
                 for j in range(len(col) - 1):
+                    if i + j >= len(col):
+                        break
+
                     if col[i + j] <= 0:
                         col[i + j // 2] = int(cumsum / j)
                         break
